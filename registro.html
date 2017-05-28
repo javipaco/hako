@@ -45,56 +45,99 @@
     
     <script src="phonegap.js"> </script>
     
-    <script language="javascript">
-		
-			function accion() {
+   <script type="text/javascript">
+  		var message ="";
+		 
+	function validar(){
+			var form = document.getElementById("registro");
+			
+			
+			var correo= form.mail.value;
+			
+			if(form.mail.value == ""){
 				
-			    var nombre = document.getElementById("user").value;
-				var contra = document.getElementById("pass").value;
+				message = "EL CAMPO E-MAIL ES OBLIGATORIO DEBE INGRESARLO";
+				document.getElementById("alerta").innerHTML = message;
+				form.mail.focus();
+				return false;
 				
-				document.writeln(nombre + contra);
-				
+				}
+			if(form.password.value == "") {
+				message =  "EL CAMPO PASSWORD ES OBLIGATORIO";
+				document.getElementById("alerta").innerHTML = message;
+				form.password.focus();
+				return false;
 			}
-		
+			if(form.password2.value == "") {
+				message =  "EL CAMPO RECTIFICAR CONTRASEÑA ES OBLIGATORIO";
+				document.getElementById("alerta").innerHTML = message;
+				form.password2.focus();
+				return false;
+			}
+			if(form.password.value != form.password2.value){
+				message =  "Las contraseñas no coniciden";
+				document.getElementById("alerta").innerHTML = message;
+				form.password.focus();
+				return false;
+			}
+			if(form.tel.value == "") {
+				message =  "EL CAMPO CELULAR ES OBLIGATORIO";
+				document.getElementById("alerta").innerHTML = message;
+				form.tel.focus();
+				return false;
+			}
+			
+			var verdad = isNaN(form.tel.value);
+			if(verdad){
+				message =  "Ingresa Solo Numeros en Celular";
+				document.getElementById("alerta").innerHTML = message;
+				form.tel.focus();
+				return false;	
+			}
+			
+			
+			
+			return true;
+			
+			}
 	</script>
     
     
 </head>
 
-<body >
-    <div  class="apphako">
-    <br>
-        <h1 style="color:#FFFFFF">Hako</h1> <h1 style="color:#CB0003" > Sushi</h1>
-        
-        <div align="center" class="gato">
-        	<br><br>
-            <form id="login">
+<body>
+
+
+<div align="center">
+        <br><br>
+        	<h3> TU CORREO SERÁ EL NOMBRE DE USUARIO PARA PODER INGRESAR</h3>
+            <br>
+        <form id="registro" onsubmit="return validar()">
+         <h3>  E-mail: </h3>
+            <input type="text" name="mail" value="" />
+            <br>
+            <br>
+          <h3>  Contrase&Ntilde;a: </h3>
+            <input type="password" name="password" maxlength="8" value="" />
             
-  				<h3> Ingresa nombre de usuario: </h3>	
-  				<input type="text" name="user" placeholder="Usuario" />
-            	<br>
-                <h3> Ingresa contraseña: </h3>	
-  				<input type="password" name="pass" placeholder="Contraseña" />
-                
-                <br><br>
-                
-                <button onclick="accion()" >Iniciar sesión</button>
-                
-                                
-            </form>
+          <h3> Confirma tu contrase&Ntilde;a: </h3>
+            <input type="password" name="password2" maxlength="8" value="" />
+            <br>
+            <br>
+          <h3>  Celular: </h3>
+            <input type="text" name="tel" value="" />
             
-            <br><br>
-            <a href="registro.html" > Registrarse </a>
+            <p>
+          <input type="submit" value="Enviar" />
+           		
+            </p>
             
-            <p id="demo"></p>
-            
-            
-            
-        </div>
-      
-         
-    </div>
     
+            <label id="alerta" ></label>
+            
+        </form>
+            
+      </div>      
     
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
